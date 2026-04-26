@@ -1,7 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count
-from django.shortcuts import redirect, render
+from django.http import HttpResponseForbidden
+from django.shortcuts import get_object_or_404, redirect, render
 
+from accounts.models import Department, User
+from dashboard.forms import AdminUserForm, DepartmentForm
 from complaints.models import Complaint, ComplaintStatus
 
 
@@ -41,3 +44,47 @@ def maintenance_dashboard(request):
 def staff_dashboard(request):
     complaints = Complaint.objects.filter(user=request.user).select_related("department", "category")
     return render(request, "dashboard/staff.html", {"complaints": complaints})
+
+
+def _require_admin(user):
+    return user.is_authenticated and user.role == "ADMIN"
+
+
+@login_required
+def manage_users_view(request, user_id=None):
+    if not _require_admin(request.user):
+        return HttpResponseForbidden("Only administrators can manage users.")
+
+    selected_user = get_object_or_404(User, pk=user_id) if user_id else None
+    if request.method == "POST":
+        form = AdminUserForm(request.POST, instance=selected_user)
+        if form.is_valid():
+            form.save()
+            return redirect("dashboard:manage-users")
+    else:
+        form = AdminUserForm(instance=selected_user)
+
+    users = User.objects.select_related("department").order_by("first_name", "username")
+    return render(request, "dashboard/users.html", {"form": form, "users": users, "selected_user": selected_user})
+
+
+@login_required
+def manage_departments_view(request, department_id=None):
+    if not _require_admin(request.user):
+        return HttpResponseForbidden("Only administrators can manage departments.")
+
+    selected_department = get_object_or_404(Department, pk=department_id) if department_id else None
+    if request.method == "POST":
+        form = DepartmentForm(request.POST, instance=selected_department)
+        if form.is_valid():
+            form.save()
+            return redirect("dashboard:manage-departments")
+    else:
+        form = DepartmentForm(instance=selected_department)
+
+    departments = Department.objects.order_by("name")
+    return render(
+        request,
+        "dashboard/departments.html",
+        {"form": form, "departments": departments, "selected_department": selected_department},
+    )

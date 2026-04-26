@@ -1,7 +1,21 @@
 {% extends 'base.html' %}
 {% block title %}University Facility Management System{% endblock %}
 {% block content %}
-<h1>University Facility Management System</h1>
-<p>A centralized platform for reporting, tracking, assigning, and resolving facility complaints across the university.</p>
-<p><a href="{% url 'complaints:track' %}">Track a complaint</a> or <a href="{% url 'accounts:register' %}">register</a> to submit one.</p>
+<section class="hero">
+	<div>
+		<span class="hero-badge">University-wide service desk</span>
+		<h1>University Facility Management System</h1>
+		<p>A centralized platform for reporting, tracking, assigning, and resolving facility complaints across the university.</p>
+		<div class="hero-actions">
+			<a class="button" href="{% url 'accounts:register' %}">Register</a>
+			<a class="button secondary" href="{% url 'accounts:login' %}">Login</a>
+			<a class="button secondary" href="{% url 'complaints:track' %}">Track Complaint</a>
+		</div>
+	</div>
+	<div class="hero-panel">
+		<h2 class="page-title" style="font-size: 1.4rem; margin-top: 0;">How it works</h2>
+		<p>Users submit complaints, the admin assigns them, maintenance staff updates progress, and everyone sees status changes in real time.</p>
+		<p class="muted">Built for LASUSTECH with role-based access, ticket tracking, notifications, and reports.</p>
+	</div>
+</section>
 {% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-panel">
+    <span class="hero-badge">Administrator</span>
+    <h1 class="page-title">Manage Users</h1>
+    <p class="muted">Update department, role, and activation status for university users.</p>
+</div>
+
+<div class="grid" style="margin-top: 1rem;">
+    <div class="form-card">
+        <h2>{% if selected_user %}Edit User{% else %}Select a user to edit{% endif %}</h2>
+        <form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save User</button></form>
+    </div>
+    <div class="card">
+        <h2>Users</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Department</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td>{{ user.get_full_name|default:user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>{{ user.department|default:"-" }}</td>
+                        <td><a href="{% url 'dashboard:edit-user' user.id %}">Edit</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5">No users found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

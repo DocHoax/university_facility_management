@@ -1,14 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Admin Dashboard</h1>
-<p>Total complaints: {{ total_complaints }}</p>
-<p>Pending: {{ pending_complaints }}</p>
-<p>In progress: {{ in_progress_complaints }}</p>
-<p>Resolved: {{ resolved_complaints }}</p>
-<p><a href="{% url 'complaints:list' %}">View all complaints</a></p>
-<p><a href="{% url 'reports:report' %}">Generate reports</a></p>
-<p><a href="{% url 'admin:index' %}">Manage users and departments</a></p>
-{% for complaint in complaints %}
-<p>{{ complaint.ticket_id }} - {{ complaint.status }} - {{ complaint.user }}</p>
-{% endfor %}
+<div class="hero-panel">
+	<span class="hero-badge">Administrator</span>
+	<h1 class="page-title">Admin Dashboard</h1>
+	<div class="grid">
+		<div class="stat"><div class="muted">Total complaints</div><p class="stat-value">{{ total_complaints }}</p></div>
+		<div class="stat"><div class="muted">Pending</div><p class="stat-value">{{ pending_complaints }}</p></div>
+		<div class="stat"><div class="muted">In progress</div><p class="stat-value">{{ in_progress_complaints }}</p></div>
+		<div class="stat"><div class="muted">Resolved</div><p class="stat-value">{{ resolved_complaints }}</p></div>
+	</div>
+	<div class="hero-actions">
+		<a class="button" href="{% url 'complaints:list' %}">View all complaints</a>
+		<a class="button secondary" href="{% url 'dashboard:manage-users' %}">Manage users</a>
+		<a class="button secondary" href="{% url 'dashboard:manage-departments' %}">Manage departments</a>
+		<a class="button secondary" href="{% url 'reports:report' %}">Generate reports</a>
+	</div>
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+	<h2>Recent complaints</h2>
+	<div class="table-wrap">
+		<table>
+			<thead>
+				<tr><th>Ticket</th><th>User</th><th>Status</th><th>Priority</th><th>Category</th></tr>
+			</thead>
+			<tbody>
+				{% for complaint in complaints %}
+				<tr>
+					<td><a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a></td>
+					<td>{{ complaint.user }}</td>
+					<td>{{ complaint.status }}</td>
+					<td>{{ complaint.priority }}</td>
+					<td>{{ complaint.category }}</td>
+				</tr>
+				{% empty %}
+				<tr><td colspan="5">No complaints recorded yet.</td></tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
 {% endblock %}

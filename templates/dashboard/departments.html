@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-panel">
+    <span class="hero-badge">Administrator</span>
+    <h1 class="page-title">Manage Departments</h1>
+    <p class="muted">Create or update academic and administrative departments used in complaint routing.</p>
+</div>
+
+<div class="grid" style="margin-top: 1rem;">
+    <div class="form-card">
+        <h2>{% if selected_department %}Edit Department{% else %}New Department{% endif %}</h2>
+        <form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Department</button></form>
+    </div>
+    <div class="card">
+        <h2>Departments</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Name</th><th>Code</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for department in departments %}
+                    <tr>
+                        <td>{{ department.name }}</td>
+                        <td>{{ department.code }}</td>
+                        <td>{% if department.is_active %}Active{% else %}Inactive{% endif %}</td>
+                        <td><a href="{% url 'dashboard:edit-department' department.id %}">Edit</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No departments found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
