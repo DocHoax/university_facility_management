@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Notifications</h1>
-{% for notification in notifications %}
-<p>
-	{% if notification.is_read %}[Read]{% else %}[Unread]{% endif %}
-	{{ notification.title }} - {{ notification.message }}
-	{% if not notification.is_read %}<a href="{% url 'notifications:mark-read' notification.id %}">Mark Read</a>{% endif %}
-</p>
-{% empty %}
-<p>No notifications.</p>
-{% endfor %}
+<div class="hero-panel" style="margin-bottom: 1rem;">
+	<span class="hero-badge">Alerts</span>
+	<h1 class="page-title">Notifications</h1>
+	<p class="muted">Review complaint updates, assignment notices, and resolution alerts.</p>
+</div>
+
+<div class="card">
+	<div class="mini-stack">
+		{% for notification in notifications %}
+		<div class="subtle-card">
+			<div class="meta-row" style="margin-top: 0;">
+				<span class="chip {% if notification.is_read %}status-success{% else %}status-open{% endif %}">{% if notification.is_read %}Read{% else %}Unread{% endif %}</span>
+				<strong>{{ notification.title }}</strong>
+			</div>
+			<p class="muted">{{ notification.message }}</p>
+			{% if not notification.is_read %}<a class="button secondary" href="{% url 'notifications:mark-read' notification.id %}">Mark Read</a>{% endif %}
+		</div>
+		{% empty %}
+		<p class="muted">No notifications.</p>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}

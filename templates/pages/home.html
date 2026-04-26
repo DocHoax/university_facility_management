@@ -11,11 +11,27 @@
 			<a class="button secondary" href="{% url 'accounts:login' %}">Login</a>
 			<a class="button secondary" href="{% url 'complaints:track' %}">Track Complaint</a>
 		</div>
+		<div class="meta-row">
+			<span class="chip">Role-based access</span>
+			<span class="chip">Ticket tracking</span>
+			<span class="chip">Email notifications</span>
+		</div>
 	</div>
 	<div class="hero-panel">
 		<h2 class="page-title" style="font-size: 1.4rem; margin-top: 0;">How it works</h2>
-		<p>Users submit complaints, the admin assigns them, maintenance staff updates progress, and everyone sees status changes in real time.</p>
-		<p class="muted">Built for LASUSTECH with role-based access, ticket tracking, notifications, and reports.</p>
+		<div class="mini-stack">
+			<div class="subtle-card"><strong>1. Submit</strong><p class="muted">Log complaints with location, priority, category, and attachments.</p></div>
+			<div class="subtle-card"><strong>2. Assign</strong><p class="muted">Administrators route requests to the right maintenance staff.</p></div>
+			<div class="subtle-card"><strong>3. Resolve</strong><p class="muted">Status updates and closures are tracked with notifications and reports.</p></div>
+		</div>
+	</div>
+</section>
+
+<section class="content-band">
+	<div class="grid">
+		<div class="stat"><div class="muted">For students & staff</div><p class="stat-value">Fast complaints</p></div>
+		<div class="stat"><div class="muted">For maintenance</div><p class="stat-value">Clear queues</p></div>
+		<div class="stat"><div class="muted">For admins</div><p class="stat-value">Actionable reports</p></div>
 	</div>
 </section>
 {% endblock %}

@@ -1,5 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Submit Complaint</h1>
-<form method="post" enctype="multipart/form-data">{% csrf_token %}{{ form.as_p }}<button type="submit">Submit</button></form>
+<div class="hero-panel" style="margin-bottom: 1rem;">
+	<span class="hero-badge">Complaints</span>
+	<h1 class="page-title">Submit Complaint</h1>
+	<p class="muted">Report facility issues with details, location, priority, and optional attachments.</p>
+</div>
+
+<div class="form-card">
+	<form method="post" enctype="multipart/form-data" class="stack">{% csrf_token %}{{ form.as_p }}<button type="submit">Submit Complaint</button></form>
+</div>
 {% endblock %}

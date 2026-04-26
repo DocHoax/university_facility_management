@@ -1,14 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Complaint {{ complaint.ticket_id }}</h1>
-<p>Status: {{ complaint.status }}</p>
-<p>{{ complaint.description }}</p>
-{% if user.role == 'ADMIN' and complaint.status != 'CLOSED' %}
-<form method="post" action="{% url 'complaints:close' complaint.ticket_id %}">{% csrf_token %}<button type="submit">Close Complaint</button></form>
-{% endif %}
-<h2>Comments</h2>
-{% for comment in complaint.comments.all %}
-<p>{{ comment.author }}: {{ comment.body }}</p>
-{% endfor %}
-<form method="post">{% csrf_token %}{{ comment_form.as_p }}<button type="submit">Add Comment</button></form>
+<div class="hero-panel" style="margin-bottom: 1rem;">
+	<span class="hero-badge">Ticket {{ complaint.ticket_id }}</span>
+	<h1 class="page-title">Complaint details</h1>
+	<div class="meta-row">
+		<span class="chip">Status: {{ complaint.status }}</span>
+		<span class="chip">Priority: {{ complaint.priority }}</span>
+		<span class="chip">Category: {{ complaint.category }}</span>
+	</div>
+	<p class="muted">{{ complaint.description }}</p>
+	{% if user.role == 'ADMIN' and complaint.status != 'CLOSED' %}
+	<form method="post" action="{% url 'complaints:close' complaint.ticket_id %}">{% csrf_token %}<button type="submit">Close Complaint</button></form>
+	{% endif %}
+</div>
+
+<div class="two-col">
+	<div class="card">
+		<h2>Timeline</h2>
+		<p><strong>Submitted:</strong> {{ complaint.date_submitted }}</p>
+		<p><strong>Resolved:</strong> {% if complaint.date_resolved %}{{ complaint.date_resolved }}{% else %}Pending{% endif %}</p>
+		<p><strong>Assigned staff:</strong> {% if complaint.assignment %}{{ complaint.assignment.assigned_to }}{% else %}Not assigned yet{% endif %}</p>
+	</div>
+	<div class="form-card">
+		<h2>Comments</h2>
+		<div class="mini-stack">
+			{% for comment in complaint.comments.all %}
+			<div class="subtle-card">
+				<strong>{{ comment.author }}</strong>
+				<p class="muted">{{ comment.body }}</p>
+			</div>
+			{% empty %}
+			<p class="muted">No comments yet.</p>
+			{% endfor %}
+		</div>
+		<form method="post" class="stack" style="margin-top: 1rem;">{% csrf_token %}{{ comment_form.as_p }}<button type="submit">Add Comment</button></form>
+	</div>
+</div>
 {% endblock %}

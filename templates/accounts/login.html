@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Login</h1>
-<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Login</button></form>
-<p><a href="{% url 'accounts:password-reset' %}">Forgot Password?</a></p>
+<div class="two-col">
+	<div class="hero-panel">
+		<span class="hero-badge">Welcome back</span>
+		<h1 class="page-title">Login</h1>
+		<p class="muted">Use your email or username to access your role-based dashboard and complaint history.</p>
+		<div class="mini-stack">
+			<div class="subtle-card"><strong>Students and staff</strong><p class="muted">Submit and track facility requests.</p></div>
+			<div class="subtle-card"><strong>Maintenance teams</strong><p class="muted">Manage assigned complaints and status updates.</p></div>
+		</div>
+	</div>
+	<div class="form-card">
+		<form method="post" class="stack">{% csrf_token %}{{ form.as_p }}<button type="submit">Login</button></form>
+		<div class="meta-row" style="margin-top: 1rem;">
+			<a href="{% url 'accounts:password-reset' %}">Forgot Password?</a>
+			<a href="{% url 'accounts:register' %}">Create account</a>
+		</div>
+	</div>
+</div>
 {% endblock %}

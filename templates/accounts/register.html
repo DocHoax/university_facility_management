@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Register</h1>
-<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Register</button></form>
+<div class="two-col">
+	<div class="hero-panel">
+		<span class="hero-badge">Join the system</span>
+		<h1 class="page-title">Register</h1>
+		<p class="muted">Create a university account to submit complaints, receive updates, and track resolution status.</p>
+		<div class="mini-stack">
+			<div class="subtle-card"><strong>Departments</strong><p class="muted">Link your account to the right department for routing.</p></div>
+			<div class="subtle-card"><strong>Notifications</strong><p class="muted">Get email and in-app updates when status changes.</p></div>
+		</div>
+	</div>
+	<div class="form-card">
+		<form method="post" class="stack">{% csrf_token %}{{ form.as_p }}<button type="submit">Register</button></form>
+		<p class="muted" style="margin-top: 1rem;">Already have an account? <a href="{% url 'accounts:login' %}">Login</a></p>
+	</div>
+</div>
 {% endblock %}

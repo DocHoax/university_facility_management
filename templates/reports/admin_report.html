@@ -6,15 +6,25 @@
 	<p class="muted">Complaint summaries by status and category for operational oversight.</p>
 </div>
 
-<div class="card" style="margin-top: 1rem;">
-	<h2>Filter Report</h2>
-	<form method="get">
-		{{ form.as_p }}
-		<div class="hero-actions">
-			<button type="submit">Apply Filters</button>
-			<button type="submit" name="export" value="csv" class="secondary">Export CSV</button>
+<div class="two-col" style="margin-top: 1rem;">
+	<div class="form-card">
+		<h2>Filter Report</h2>
+		<form method="get" class="stack">
+			{{ form.as_p }}
+			<div class="hero-actions">
+				<button type="submit">Apply Filters</button>
+				<button type="submit" name="export" value="csv" class="secondary">Export CSV</button>
+			</div>
+		</form>
+	</div>
+	<div class="card">
+		<h2>Summary</h2>
+		<div class="grid">
+			<div class="stat"><div class="muted">Statuses</div><p class="stat-value">{{ status_summary|length }}</p></div>
+			<div class="stat"><div class="muted">Categories</div><p class="stat-value">{{ category_summary|length }}</p></div>
+			<div class="stat"><div class="muted">Departments</div><p class="stat-value">{{ department_summary|length }}</p></div>
 		</div>
-	</form>
+	</div>
 </div>
 
 <div class="grid" style="margin-top: 1rem;">

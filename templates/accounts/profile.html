@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Profile</h1>
-<form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Profile</button></form>
-<p><a href="{% url 'accounts:change-password' %}">Change Password</a></p>
+<div class="hero-panel" style="margin-bottom: 1rem;">
+	<span class="hero-badge">Account</span>
+	<h1 class="page-title">Profile</h1>
+	<p class="muted">Keep your contact information and department details up to date.</p>
+</div>
+
+<div class="two-col">
+	<div class="form-card">
+		<form method="post" class="stack">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Profile</button></form>
+	</div>
+	<div class="card">
+		<h2>Security</h2>
+		<p class="muted">Use a strong password and update it regularly.</p>
+		<a class="button secondary" href="{% url 'accounts:change-password' %}">Change Password</a>
+	</div>
+</div>
 {% endblock %}
