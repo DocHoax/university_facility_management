@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.models import Q
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -17,6 +18,19 @@ def _is_admin(user):
 
 def _is_maintenance(user):
     return user.is_authenticated and user.role == "MAINTENANCE"
+
+
+def _can_view_complaint(user, complaint):
+    if not user.is_authenticated:
+        return False
+    if user.role == "ADMIN":
+        return True
+    if complaint.user_id == user.id:
+        return True
+    assignment = getattr(complaint, "assignment", None)
+    if user.role == "MAINTENANCE" and assignment and assignment.assigned_to_id == user.id:
+        return True
+    return False
 
 
 def _notify(user, title, message):
@@ -47,6 +61,9 @@ def complaint_create_view(request):
 @login_required
 def complaint_detail_view(request, ticket_id):
     complaint = get_object_or_404(Complaint, ticket_id=ticket_id)
+    if not _can_view_complaint(request.user, complaint):
+        return HttpResponseForbidden("You do not have permission to view this complaint.")
+
     if request.method == "POST":
         comment_form = ComplaintCommentForm(request.POST)
         if comment_form.is_valid():
@@ -63,6 +80,13 @@ def complaint_detail_view(request, ticket_id):
 @login_required
 def complaint_list_view(request):
     complaints = Complaint.objects.select_related("user", "department", "category")
+    if request.user.role == "ADMIN":
+        pass
+    elif request.user.role == "MAINTENANCE":
+        complaints = complaints.filter(Q(assignment__assigned_to=request.user) | Q(status__in=[ComplaintStatus.ASSIGNED, ComplaintStatus.IN_PROGRESS]))
+    else:
+        complaints = complaints.filter(user=request.user)
+
     ticket_id = request.GET.get("ticket_id", "").strip()
     status = request.GET.get("status", "").strip()
     category = request.GET.get("category", "").strip()
