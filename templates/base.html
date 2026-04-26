@@ -12,10 +12,12 @@
             <a href="{% url 'pages:about' %}">About</a>
             <a href="{% url 'pages:contact' %}">Contact</a>
             <a href="{% url 'pages:faq' %}">FAQ</a>
+            <a href="{% url 'complaints:track' %}">Track Complaint</a>
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard:home' %}">Dashboard</a>
                 <a href="{% url 'complaints:list' %}">Complaints</a>
                 <a href="{% url 'notifications:list' %}">Notifications</a>
+                <a href="{% url 'accounts:profile' %}">Profile</a>
                 <a href="{% url 'accounts:logout' %}">Logout</a>
             {% else %}
                 <a href="{% url 'accounts:login' %}">Login</a>

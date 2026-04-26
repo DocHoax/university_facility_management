@@ -5,4 +5,10 @@
 <p>Pending: {{ pending_complaints }}</p>
 <p>In progress: {{ in_progress_complaints }}</p>
 <p>Resolved: {{ resolved_complaints }}</p>
+<p><a href="{% url 'complaints:list' %}">View all complaints</a></p>
+<p><a href="{% url 'reports:report' %}">Generate reports</a></p>
+<p><a href="{% url 'admin:index' %}">Manage users and departments</a></p>
+{% for complaint in complaints %}
+<p>{{ complaint.ticket_id }} - {{ complaint.status }} - {{ complaint.user }}</p>
+{% endfor %}
 {% endblock %}

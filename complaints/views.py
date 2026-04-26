@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from accounts.models import User
-from complaints.forms import ComplaintAssignmentForm, ComplaintCommentForm, ComplaintForm, ComplaintStatusUpdateForm
+from complaints.forms import ComplaintAssignmentForm, ComplaintCommentForm, ComplaintForm, ComplaintStatusUpdateForm, ComplaintTrackForm
 from complaints.models import Complaint, ComplaintAssignment, ComplaintComment, ComplaintStatus
 from notifications.services import create_notification
 
@@ -62,8 +62,36 @@ def complaint_detail_view(request, ticket_id):
 
 @login_required
 def complaint_list_view(request):
-    complaints = Complaint.objects.select_related("user", "department", "category").order_by("-date_submitted")
-    return render(request, "complaints/list.html", {"complaints": complaints})
+    complaints = Complaint.objects.select_related("user", "department", "category")
+    ticket_id = request.GET.get("ticket_id", "").strip()
+    status = request.GET.get("status", "").strip()
+    category = request.GET.get("category", "").strip()
+    priority = request.GET.get("priority", "").strip()
+
+    if ticket_id:
+        complaints = complaints.filter(ticket_id__icontains=ticket_id)
+    if status:
+        complaints = complaints.filter(status=status)
+    if category:
+        complaints = complaints.filter(category_id=category)
+    if priority:
+        complaints = complaints.filter(priority=priority)
+
+    complaints = complaints.order_by("-date_submitted")
+    return render(
+        request,
+        "complaints/list.html",
+        {"complaints": complaints, "ticket_id": ticket_id, "status": status, "category": category, "priority": priority},
+    )
+
+
+def complaint_track_view(request):
+    complaint = None
+    form = ComplaintTrackForm(request.GET or None)
+    if form.is_valid():
+        ticket_id = form.cleaned_data["ticket_id"]
+        complaint = Complaint.objects.select_related("user", "department", "category").prefetch_related("comments").filter(ticket_id__iexact=ticket_id).first()
+    return render(request, "complaints/track.html", {"form": form, "complaint": complaint})
 
 
 @login_required

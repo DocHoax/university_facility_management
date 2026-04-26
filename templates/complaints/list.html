@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>Complaints</h1>
-{% for complaint in complaints %}<p><a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a> - {{ complaint.status }}</p>{% endfor %}
+<form method="get">
+	<p><label>Ticket ID <input type="text" name="ticket_id" value="{{ ticket_id }}"></label></p>
+	<p><label>Status <input type="text" name="status" value="{{ status }}"></label></p>
+	<p><label>Category ID <input type="text" name="category" value="{{ category }}"></label></p>
+	<p><label>Priority <input type="text" name="priority" value="{{ priority }}"></label></p>
+	<button type="submit">Filter</button>
+</form>
+{% for complaint in complaints %}
+<p>
+	<a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a>
+	- {{ complaint.status }} - {{ complaint.priority }}
+	{% if user.role == 'ADMIN' %}<a href="{% url 'complaints:assign' complaint.ticket_id %}">Assign</a>{% endif %}
+	{% if user.role == 'MAINTENANCE' %}<a href="{% url 'complaints:status-update' complaint.ticket_id %}">Update Status</a>{% endif %}
+</p>
+{% empty %}
+<p>No complaints found.</p>
+{% endfor %}
 {% endblock %}

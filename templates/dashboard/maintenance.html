@@ -1,2 +1,10 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Maintenance Dashboard</h1>{% for complaint in complaints %}<p>{{ complaint.ticket_id }} - {{ complaint.status }}</p>{% endfor %}{% endblock %}
+{% block content %}
+<h1>Maintenance Dashboard</h1>
+<p><a href="{% url 'notifications:list' %}">View notifications</a></p>
+{% for complaint in complaints %}
+<p>{{ complaint.ticket_id }} - {{ complaint.status }} <a href="{% url 'complaints:status-update' complaint.ticket_id %}">Update Status</a></p>
+{% empty %}
+<p>No assigned complaints.</p>
+{% endfor %}
+{% endblock %}

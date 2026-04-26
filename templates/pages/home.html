@@ -3,4 +3,5 @@
 {% block content %}
 <h1>University Facility Management System</h1>
 <p>A centralized platform for reporting, tracking, assigning, and resolving facility complaints across the university.</p>
+<p><a href="{% url 'complaints:track' %}">Track a complaint</a> or <a href="{% url 'accounts:register' %}">register</a> to submit one.</p>
 {% endblock %}

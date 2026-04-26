@@ -27,3 +27,7 @@ class ComplaintAssignmentForm(forms.Form):
 
 class ComplaintStatusUpdateForm(forms.Form):
     status = forms.ChoiceField(choices=Complaint._meta.get_field("status").choices)
+
+
+class ComplaintTrackForm(forms.Form):
+    ticket_id = forms.CharField(label="Ticket ID", max_length=20)

@@ -1,2 +1,11 @@
 {% extends 'base.html' %}
-{% block content %}<h1>Staff Dashboard</h1>{% for complaint in complaints %}<p>{{ complaint.ticket_id }} - {{ complaint.status }}</p>{% endfor %}{% endblock %}
+{% block content %}
+<h1>Staff Dashboard</h1>
+<p><a href="{% url 'complaints:create' %}">Submit New Complaint</a></p>
+<p><a href="{% url 'accounts:profile' %}">Edit Profile</a></p>
+{% for complaint in complaints %}
+<p><a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a> - {{ complaint.status }}</p>
+{% empty %}
+<p>You have not submitted any complaints yet.</p>
+{% endfor %}
+{% endblock %}
