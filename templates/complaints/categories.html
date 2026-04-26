@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero-panel">
+    <span class="hero-badge">Administrator</span>
+    <h1 class="page-title">Complaint Categories</h1>
+    <p class="muted">Manage facility complaint categories used for routing and reports.</p>
+</div>
+
+<div class="grid" style="margin-top: 1rem;">
+    <div class="form-card">
+        <h2>{% if selected_category %}Edit Category{% else %}New Category{% endif %}</h2>
+        <form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save Category</button></form>
+    </div>
+    <div class="card">
+        <h2>Categories</h2>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Name</th><th>Status</th><th>Action</th></tr></thead>
+                <tbody>
+                    {% for category in categories %}
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{% if category.is_active %}Active{% else %}Inactive{% endif %}</td>
+                        <td><a href="{% url 'complaints:categories' %}?edit={{ category.id }}">Edit</a></td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3">No categories found.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

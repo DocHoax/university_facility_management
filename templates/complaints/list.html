@@ -18,4 +18,8 @@
 {% empty %}
 <p>No complaints found.</p>
 {% endfor %}
+<div class="helper-row">
+	<a href="{% url 'complaints:create' %}">Submit new complaint</a>
+	<a href="{% url 'complaints:track' %}">Track by ticket ID</a>
+</div>
 {% endblock %}

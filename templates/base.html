@@ -23,6 +23,7 @@
                     {% if user.is_authenticated %}
                         <a href="{% url 'dashboard:home' %}">Dashboard</a>
                         <a href="{% url 'complaints:list' %}">Complaints</a>
+                        {% if user.role == 'ADMIN' %}<a href="{% url 'complaints:categories' %}">Categories</a>{% endif %}
                         <a href="{% url 'notifications:list' %}">Notifications</a>
                         <a href="{% url 'accounts:profile' %}">Profile</a>
                         <a href="{% url 'accounts:logout' %}">Logout</a>

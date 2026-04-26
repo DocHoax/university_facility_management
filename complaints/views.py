@@ -7,8 +7,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from accounts.models import User
-from complaints.forms import ComplaintAssignmentForm, ComplaintCommentForm, ComplaintForm, ComplaintStatusUpdateForm, ComplaintTrackForm
-from complaints.models import Complaint, ComplaintAssignment, ComplaintComment, ComplaintStatus
+from complaints.forms import ComplaintAssignmentForm, ComplaintCategoryForm, ComplaintCommentForm, ComplaintForm, ComplaintStatusUpdateForm, ComplaintTrackForm
+from complaints.models import Complaint, ComplaintAssignment, ComplaintCategory, ComplaintComment, ComplaintStatus
 from notifications.services import create_notification
 
 
@@ -165,3 +165,25 @@ def complaint_status_update_view(request, ticket_id):
     else:
         form = ComplaintStatusUpdateForm(initial={"status": complaint.status})
     return render(request, "complaints/status_update.html", {"complaint": complaint, "form": form})
+
+
+@login_required
+def category_list_view(request):
+    if not _is_admin(request.user):
+        return HttpResponseForbidden("Only administrators can manage categories.")
+
+    selected_category = None
+    category_id = request.GET.get("edit")
+    if category_id:
+        selected_category = get_object_or_404(ComplaintCategory, pk=category_id)
+
+    if request.method == "POST":
+        form = ComplaintCategoryForm(request.POST, instance=selected_category)
+        if form.is_valid():
+            form.save()
+            return redirect("complaints:categories")
+    else:
+        form = ComplaintCategoryForm(instance=selected_category)
+
+    categories = ComplaintCategory.objects.order_by("name")
+    return render(request, "complaints/categories.html", {"form": form, "categories": categories, "selected_category": selected_category})

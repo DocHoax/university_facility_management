@@ -1,7 +1,7 @@
 from django import forms
 
 from accounts.models import User
-from complaints.models import Complaint, ComplaintComment
+from complaints.models import Complaint, ComplaintCategory, ComplaintComment
 
 
 class ComplaintForm(forms.ModelForm):
@@ -31,3 +31,9 @@ class ComplaintStatusUpdateForm(forms.Form):
 
 class ComplaintTrackForm(forms.Form):
     ticket_id = forms.CharField(label="Ticket ID", max_length=20)
+
+
+class ComplaintCategoryForm(forms.ModelForm):
+    class Meta:
+        model = ComplaintCategory
+        fields = ["name", "description", "is_active"]
