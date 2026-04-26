@@ -3,4 +3,9 @@
 <h1>Complaint {{ complaint.ticket_id }}</h1>
 <p>Status: {{ complaint.status }}</p>
 <p>{{ complaint.description }}</p>
+<h2>Comments</h2>
+{% for comment in complaint.comments.all %}
+<p>{{ comment.author }}: {{ comment.body }}</p>
+{% endfor %}
+<form method="post">{% csrf_token %}{{ comment_form.as_p }}<button type="submit">Add Comment</button></form>
 {% endblock %}
