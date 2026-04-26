@@ -18,7 +18,7 @@ def home(request):
 @login_required
 def admin_dashboard(request):
     counts = Complaint.objects.values("status").annotate(total=Count("id"))
-    summary = {item["status"].lower(): item["total"] for item in counts}
+    summary = {item["status"]: item["total"] for item in counts}
     context = {
         "total_complaints": Complaint.objects.count(),
         "pending_complaints": summary.get(ComplaintStatus.PENDING, 0),
