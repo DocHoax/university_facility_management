@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card">
+<div class="hero-panel">
+	<span class="hero-badge">About the system</span>
 	<h1 class="page-title">About</h1>
-	<p>This system centralizes university infrastructure requests, helping the facility unit manage complaints, assignments, status updates, and reporting in one place.</p>
+	<p class="muted">This platform centralizes university infrastructure requests, helping the facility unit manage complaints, assignments, status updates, and reporting in one place.</p>
+</div>
+
+<div class="grid" style="margin-top: 1rem;">
+	<div class="card"><h2 class="section-title">Centralized workflow</h2><p class="muted">All complaints move through one structured process from submission to closure.</p></div>
+	<div class="card"><h2 class="section-title">Role-based access</h2><p class="muted">Admins, maintenance staff, lecturers, and staff each see the actions relevant to them.</p></div>
+	<div class="card"><h2 class="section-title">Reporting</h2><p class="muted">Facility leaders can analyze complaints by category, department, and status.</p></div>
 </div>
 {% endblock %}

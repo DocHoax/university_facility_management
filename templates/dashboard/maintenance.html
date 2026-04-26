@@ -1,10 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Maintenance Dashboard</h1>
-<p><a href="{% url 'notifications:list' %}">View notifications</a></p>
-{% for complaint in complaints %}
-<p>{{ complaint.ticket_id }} - {{ complaint.status }} <a href="{% url 'complaints:status-update' complaint.ticket_id %}">Update Status</a></p>
-{% empty %}
-<p>No assigned complaints.</p>
-{% endfor %}
+<div class="hero-panel">
+	<span class="hero-badge">Maintenance</span>
+	<h1 class="page-title">Maintenance Dashboard</h1>
+	<p class="muted">Track assigned complaints, update status, and keep the university informed.</p>
+	<div class="hero-actions">
+		<a class="button secondary" href="{% url 'notifications:list' %}">View notifications</a>
+		<a class="button secondary" href="{% url 'complaints:list' %}">All complaints</a>
+	</div>
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+	<h2 class="section-title">Assigned complaints</h2>
+	<div class="mini-stack">
+		{% for complaint in complaints %}
+		<div class="subtle-card">
+			<div class="meta-row" style="margin-top: 0;">
+				<span class="chip">{{ complaint.ticket_id }}</span>
+				<span class="chip">{{ complaint.status }}</span>
+				<span class="chip">{{ complaint.priority }}</span>
+			</div>
+			<p class="muted">{{ complaint.category }} at {{ complaint.location }}</p>
+			<a class="button" href="{% url 'complaints:status-update' complaint.ticket_id %}">Update Status</a>
+		</div>
+		{% empty %}
+		<p class="muted">No assigned complaints.</p>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}

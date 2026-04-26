@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card">
+<div class="hero-panel">
+	<span class="hero-badge">Help guide</span>
 	<h1 class="page-title">Help Guide</h1>
-	<p>Register, submit a complaint, note your ticket ID, and follow updates from your dashboard or the tracking page.</p>
+	<p class="muted">Register, submit a complaint, note your ticket ID, and follow updates from your dashboard or the tracking page.</p>
+</div>
+
+<div class="grid" style="margin-top: 1rem;">
+	<div class="card"><h2 class="section-title">1. Register</h2><p class="muted">Create an account using your university details and department.</p></div>
+	<div class="card"><h2 class="section-title">2. Submit</h2><p class="muted">Include the complaint location, priority, category, and any attachment.</p></div>
+	<div class="card"><h2 class="section-title">3. Track</h2><p class="muted">Use your ticket ID to view assignments, comments, and status changes.</p></div>
 </div>
 {% endblock %}

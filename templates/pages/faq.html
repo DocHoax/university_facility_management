@@ -1,7 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="card">
+<div class="hero-panel">
+	<span class="hero-badge">FAQ</span>
 	<h1 class="page-title">FAQ</h1>
-	<p>Frequently asked questions about the platform will be expanded as the system grows.</p>
+	<p class="muted">Frequently asked questions about the platform and how to use it effectively.</p>
+</div>
+
+<div class="stack" style="margin-top: 1rem;">
+	<div class="card"><h2 class="section-title">How do I submit a complaint?</h2><p class="muted">Register, log in, and open the complaint form from your dashboard or the complaints page.</p></div>
+	<div class="card"><h2 class="section-title">How do I check progress?</h2><p class="muted">Use your ticket ID on the tracking page or watch the notifications panel for updates.</p></div>
+	<div class="card"><h2 class="section-title">Who handles assignment?</h2><p class="muted">Administrators assign complaints to maintenance staff and can close tickets after resolution.</p></div>
 </div>
 {% endblock %}

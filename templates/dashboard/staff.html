@@ -1,11 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Staff Dashboard</h1>
-<p><a href="{% url 'complaints:create' %}">Submit New Complaint</a></p>
-<p><a href="{% url 'accounts:profile' %}">Edit Profile</a></p>
-{% for complaint in complaints %}
-<p><a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a> - {{ complaint.status }}</p>
-{% empty %}
-<p>You have not submitted any complaints yet.</p>
-{% endfor %}
+<div class="hero-panel">
+	<span class="hero-badge">Department staff</span>
+	<h1 class="page-title">Staff Dashboard</h1>
+	<p class="muted">Submit complaints, monitor their progress, and keep your profile current.</p>
+	<div class="hero-actions">
+		<a class="button" href="{% url 'complaints:create' %}">Submit New Complaint</a>
+		<a class="button secondary" href="{% url 'accounts:profile' %}">Edit Profile</a>
+		<a class="button secondary" href="{% url 'complaints:track' %}">Track Ticket</a>
+	</div>
+</div>
+
+<div class="card" style="margin-top: 1rem;">
+	<h2 class="section-title">Your complaints</h2>
+	<div class="mini-stack">
+		{% for complaint in complaints %}
+		<div class="subtle-card">
+			<div class="meta-row" style="margin-top: 0;">
+				<span class="chip">{{ complaint.ticket_id }}</span>
+				<span class="chip">{{ complaint.status }}</span>
+			</div>
+			<p class="muted">{{ complaint.category }} at {{ complaint.location }}</p>
+			<a href="{% url 'complaints:detail' complaint.ticket_id %}">View details</a>
+		</div>
+		{% empty %}
+		<p class="muted">You have not submitted any complaints yet.</p>
+		{% endfor %}
+	</div>
+</div>
 {% endblock %}
