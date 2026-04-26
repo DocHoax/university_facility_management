@@ -1,0 +1,5 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Complaints</h1>
+{% for complaint in complaints %}<p><a href="{% url 'complaints:detail' complaint.ticket_id %}">{{ complaint.ticket_id }}</a> - {{ complaint.status }}</p>{% endfor %}
+{% endblock %}

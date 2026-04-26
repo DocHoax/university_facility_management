@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Admin Dashboard</h1>
+<p>Total complaints: {{ total_complaints }}</p>
+<p>Pending: {{ pending_complaints }}</p>
+<p>In progress: {{ in_progress_complaints }}</p>
+<p>Resolved: {{ resolved_complaints }}</p>
+{% endblock %}

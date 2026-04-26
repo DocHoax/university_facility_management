@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Complaint {{ complaint.ticket_id }}</h1>
+<p>Status: {{ complaint.status }}</p>
+<p>{{ complaint.description }}</p>
+{% endblock %}
