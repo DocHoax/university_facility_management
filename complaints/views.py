@@ -168,6 +168,22 @@ def complaint_status_update_view(request, ticket_id):
 
 
 @login_required
+def complaint_close_view(request, ticket_id):
+    if not _is_admin(request.user):
+        return HttpResponseForbidden("Only administrators can close complaints.")
+
+    complaint = get_object_or_404(Complaint, ticket_id=ticket_id)
+    complaint.status = ComplaintStatus.CLOSED
+    complaint.date_resolved = complaint.date_resolved or timezone.now()
+    complaint.save(update_fields=["status", "date_resolved"])
+    _notify(complaint.user, f"Complaint {complaint.ticket_id} closed", "Your complaint has been closed by the administrator.")
+    if hasattr(complaint, "assignment"):
+        _notify(complaint.assignment.assigned_to, f"Complaint {complaint.ticket_id} closed", "The complaint has been closed by the administrator.")
+    messages.success(request, "Complaint closed successfully.")
+    return redirect("complaints:detail", ticket_id=ticket_id)
+
+
+@login_required
 def category_list_view(request):
     if not _is_admin(request.user):
         return HttpResponseForbidden("Only administrators can manage categories.")

@@ -74,3 +74,11 @@ class ComplaintTests(TestCase):
         response = self.client.get(reverse("complaints:categories"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Complaint Categories")
+
+    def test_admin_can_close_complaint(self):
+        ComplaintAssignment.objects.create(complaint=self.complaint, assigned_to=self.maintenance, assigned_by=self.admin)
+        self.client.login(username="admin", password="Password123!")
+        response = self.client.post(reverse("complaints:close", args=[self.complaint.ticket_id]))
+        self.assertEqual(response.status_code, 302)
+        self.complaint.refresh_from_db()
+        self.assertEqual(self.complaint.status, ComplaintStatus.CLOSED)

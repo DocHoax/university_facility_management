@@ -8,6 +8,7 @@ from complaints.views import (
     category_list_view,
     complaint_track_view,
     complaint_status_update_view,
+    complaint_close_view,
 )
 
 app_name = "complaints"
@@ -19,5 +20,6 @@ urlpatterns = [
     path("create/", complaint_create_view, name="create"),
     path("<str:ticket_id>/assign/", complaint_assign_view, name="assign"),
     path("<str:ticket_id>/status/", complaint_status_update_view, name="status-update"),
+    path("<str:ticket_id>/close/", complaint_close_view, name="close"),
     path("<str:ticket_id>/", complaint_detail_view, name="detail"),
 ]

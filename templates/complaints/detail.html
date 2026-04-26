@@ -3,6 +3,9 @@
 <h1>Complaint {{ complaint.ticket_id }}</h1>
 <p>Status: {{ complaint.status }}</p>
 <p>{{ complaint.description }}</p>
+{% if user.role == 'ADMIN' and complaint.status != 'CLOSED' %}
+<form method="post" action="{% url 'complaints:close' complaint.ticket_id %}">{% csrf_token %}<button type="submit">Close Complaint</button></form>
+{% endif %}
 <h2>Comments</h2>
 {% for comment in complaint.comments.all %}
 <p>{{ comment.author }}: {{ comment.body }}</p>
