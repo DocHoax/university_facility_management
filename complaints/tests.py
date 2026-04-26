@@ -68,3 +68,9 @@ class ComplaintTests(TestCase):
         self.complaint.refresh_from_db()
         self.assertEqual(self.complaint.status, ComplaintStatus.RESOLVED)
         self.assertIsNotNone(self.complaint.date_resolved)
+
+    def test_admin_can_manage_categories(self):
+        self.client.login(username="admin", password="Password123!")
+        response = self.client.get(reverse("complaints:categories"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Complaint Categories")
