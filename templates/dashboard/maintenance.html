@@ -1,14 +1,36 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block content %}
-<div class="hero-panel">
-	<span class="hero-badge">Maintenance</span>
-	<h1 class="page-title">Maintenance Dashboard</h1>
-	<p class="muted">Track assigned complaints, update status, and keep the university informed.</p>
-	<div class="hero-actions">
-		<a class="button secondary" href="{% url 'notifications:list' %}">View notifications</a>
-		<a class="button secondary" href="{% url 'complaints:list' %}">All complaints</a>
+<section class="hero">
+	<div class="hero-panel">
+		<span class="hero-badge">Maintenance</span>
+		<h1 class="page-title">Maintenance Dashboard</h1>
+		<p class="muted">Track assigned complaints, update status, and keep the university informed.</p>
+		<div class="hero-actions">
+			<a class="button secondary" href="{% url 'notifications:list' %}">View notifications</a>
+			<a class="button secondary" href="{% url 'complaints:list' %}">All complaints</a>
+		</div>
+		<div class="feature-grid" style="margin-top: 1.4rem;">
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/wrench.svg' %}" alt=""></div>
+				<h3>Work queue</h3>
+				<p class="muted">Focus on the complaints that are assigned to you.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/bell.svg' %}" alt=""></div>
+				<h3>Updates</h3>
+				<p class="muted">Keep students and staff updated as work progresses.</p>
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="hero-panel">
+		{% include 'partials/maintenance_illustration.html' %}
+		<div class="mini-stack" style="margin-top: 1rem;">
+			<div class="subtle-card"><strong>Update status</strong><p class="muted">Move tickets from assigned to in progress and resolved.</p></div>
+			<div class="subtle-card"><strong>Close the loop</strong><p class="muted">Leave clear comments when work is complete.</p></div>
+		</div>
+	</div>
+</section>
 
 <div class="card" style="margin-top: 1rem;">
 	<h2 class="section-title">Assigned complaints</h2>
@@ -16,7 +38,7 @@
 		{% for complaint in complaints %}
 		<div class="subtle-card">
 			<div class="meta-row" style="margin-top: 0;">
-				<span class="chip">{{ complaint.ticket_id }}</span>
+				<span class="chip"><img class="inline-icon" src="{% static 'icons/ticket.svg' %}" alt="">{{ complaint.ticket_id }}</span>
 				<span class="chip">{{ complaint.status }}</span>
 				<span class="chip">{{ complaint.priority }}</span>
 			</div>

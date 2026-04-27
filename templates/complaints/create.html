@@ -1,12 +1,70 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block content %}
-<div class="hero-panel" style="margin-bottom: 1rem;">
-	<span class="hero-badge">Complaints</span>
-	<h1 class="page-title">Submit Complaint</h1>
-	<p class="muted">Report facility issues with details, location, priority, and optional attachments.</p>
-</div>
+<section class="hero">
+	<div class="hero-panel">
+		<span class="hero-badge">Complaints</span>
+		<h1 class="page-title">Submit Complaint</h1>
+		<p class="muted">Use the guided steps below to submit a complete facility request.</p>
+		<div class="mini-stack">
+			<div class="subtle-card"><strong>Guided flow</strong><p class="muted">Complete the form in three short steps.</p></div>
+			<div class="subtle-card"><strong>Fast routing</strong><p class="muted">The right team gets the right information from the start.</p></div>
+		</div>
+	</div>
+	<div class="hero-panel">
+		{% include 'partials/form_illustration.html' %}
+		<p class="muted" style="margin-top: 1rem;">Tip: include the exact room, block, or office location for quicker resolution.</p>
+	</div>
+</section>
 
-<div class="form-card">
-	<form method="post" enctype="multipart/form-data" class="stack">{% csrf_token %}{{ form.as_p }}<button type="submit">Submit Complaint</button></form>
+<div class="form-card" style="margin-top: 1rem;">
+	<form method="post" enctype="multipart/form-data" class="stepper">{% csrf_token %}
+		<div class="step-card">
+			<div class="step-header">
+				<span class="step-number">1</span>
+				<div>
+					<h2 class="section-title">Complaint basics</h2>
+					<p class="field-help">Choose the department and the issue category.</p>
+				</div>
+			</div>
+			<div class="field-grid">
+				<div class="field-group">{{ form.department.label_tag }}{{ form.department }}</div>
+				<div class="field-group">{{ form.category.label_tag }}{{ form.category }}</div>
+			</div>
+		</div>
+
+		<div class="step-card">
+			<div class="step-header">
+				<span class="step-number">2</span>
+				<div>
+					<h2 class="section-title">Location and details</h2>
+					<p class="field-help">Tell us exactly where the issue is and what happened.</p>
+				</div>
+			</div>
+			<div class="field-grid">
+				<div class="field-group">{{ form.location.label_tag }}{{ form.location }}</div>
+				<div class="field-group">{{ form.description.label_tag }}{{ form.description }}</div>
+			</div>
+		</div>
+
+		<div class="step-card">
+			<div class="step-header">
+				<span class="step-number">3</span>
+				<div>
+					<h2 class="section-title">Priority and evidence</h2>
+					<p class="field-help">Add urgency and attach any supporting file or image.</p>
+				</div>
+			</div>
+			<div class="field-grid">
+				<div class="field-group">{{ form.priority.label_tag }}{{ form.priority }}</div>
+				<div class="field-group">{{ form.attachment.label_tag }}{{ form.attachment }}</div>
+			</div>
+		</div>
+
+		<div class="hero-actions">
+			<button type="submit">Submit Complaint</button>
+			<a class="button secondary" href="{% url 'complaints:track' %}">Track a ticket</a>
+		</div>
+	</form>
 </div>
 {% endblock %}

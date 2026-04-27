@@ -1,15 +1,37 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block content %}
-<div class="hero-panel">
-	<span class="hero-badge">Department staff</span>
-	<h1 class="page-title">Staff Dashboard</h1>
-	<p class="muted">Submit complaints, monitor their progress, and keep your profile current.</p>
-	<div class="hero-actions">
-		<a class="button" href="{% url 'complaints:create' %}">Submit New Complaint</a>
-		<a class="button secondary" href="{% url 'accounts:profile' %}">Edit Profile</a>
-		<a class="button secondary" href="{% url 'complaints:track' %}">Track Ticket</a>
+<section class="hero">
+	<div class="hero-panel">
+		<span class="hero-badge">Department staff</span>
+		<h1 class="page-title">Staff Dashboard</h1>
+		<p class="muted">Submit complaints, monitor their progress, and keep your profile current.</p>
+		<div class="hero-actions">
+			<a class="button" href="{% url 'complaints:create' %}">Submit New Complaint</a>
+			<a class="button secondary" href="{% url 'accounts:profile' %}">Edit Profile</a>
+			<a class="button secondary" href="{% url 'complaints:track' %}">Track Ticket</a>
+		</div>
+		<div class="feature-grid" style="margin-top: 1.4rem;">
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/clipboard.svg' %}" alt=""></div>
+				<h3>Submit quickly</h3>
+				<p class="muted">Capture issues with the right location and priority the first time.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/ticket.svg' %}" alt=""></div>
+				<h3>Track easily</h3>
+				<p class="muted">Follow progress with your ticket ID and notifications.</p>
+			</div>
+		</div>
 	</div>
-</div>
+	<div class="hero-panel">
+		{% include 'partials/staff_illustration.html' %}
+		<div class="mini-stack" style="margin-top: 1rem;">
+			<div class="subtle-card"><strong>Fast reporting</strong><p class="muted">Log faults without needing a separate helpdesk call.</p></div>
+			<div class="subtle-card"><strong>Status visibility</strong><p class="muted">See whether your issue is pending, assigned, or resolved.</p></div>
+		</div>
+	</div>
+</section>
 
 <div class="card" style="margin-top: 1rem;">
 	<h2 class="section-title">Your complaints</h2>
@@ -17,7 +39,7 @@
 		{% for complaint in complaints %}
 		<div class="subtle-card">
 			<div class="meta-row" style="margin-top: 0;">
-				<span class="chip">{{ complaint.ticket_id }}</span>
+				<span class="chip"><img class="inline-icon" src="{% static 'icons/ticket.svg' %}" alt="">{{ complaint.ticket_id }}</span>
 				<span class="chip">{{ complaint.status }}</span>
 			</div>
 			<p class="muted">{{ complaint.category }} at {{ complaint.location }}</p>

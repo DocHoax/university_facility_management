@@ -1,8 +1,9 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block title %}University Facility Management System{% endblock %}
 {% block content %}
 <section class="hero">
-	<div>
+	<div class="hero-panel">
 		<span class="hero-badge">University-wide service desk</span>
 		<h1>University Facility Management System</h1>
 		<p>A centralized platform for reporting, tracking, assigning, and resolving facility complaints across the university.</p>
@@ -16,9 +17,27 @@
 			<span class="chip">Ticket tracking</span>
 			<span class="chip">Email notifications</span>
 		</div>
+		<div class="feature-grid" style="margin-top: 1.4rem;">
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/clipboard.svg' %}" alt=""></div>
+				<h3>Log issues</h3>
+				<p class="muted">Submit complaints with department, priority, and supporting attachments.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/wrench.svg' %}" alt=""></div>
+				<h3>Route work</h3>
+				<p class="muted">Administrators assign complaints to the correct maintenance staff.</p>
+			</div>
+			<div class="feature-card">
+				<div class="feature-icon"><img class="inline-icon" src="{% static 'icons/chart.svg' %}" alt=""></div>
+				<h3>See reports</h3>
+				<p class="muted">Track status, workload, and complaint trends across the university.</p>
+			</div>
+		</div>
 	</div>
 	<div class="hero-panel">
-		<h2 class="page-title" style="font-size: 1.4rem; margin-top: 0;">How it works</h2>
+		{% include 'partials/landing_illustration.html' %}
+		<h2 class="page-title" style="font-size: 1.4rem; margin-top: 1rem;">How it works</h2>
 		<div class="mini-stack">
 			<div class="subtle-card"><strong>1. Submit</strong><p class="muted">Log complaints with location, priority, category, and attachments.</p></div>
 			<div class="subtle-card"><strong>2. Assign</strong><p class="muted">Administrators route requests to the right maintenance staff.</p></div>

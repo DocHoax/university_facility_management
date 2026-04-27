@@ -1,21 +1,32 @@
+{% load static %}
 {% extends 'base.html' %}
 {% block content %}
-<div class="hero-panel">
-	<span class="hero-badge">Administrator</span>
-	<h1 class="page-title">Admin Dashboard</h1>
-	<div class="grid">
-		<div class="stat"><div class="muted">Total complaints</div><p class="stat-value">{{ total_complaints }}</p></div>
-		<div class="stat"><div class="muted">Pending</div><p class="stat-value">{{ pending_complaints }}</p></div>
-		<div class="stat"><div class="muted">In progress</div><p class="stat-value">{{ in_progress_complaints }}</p></div>
-		<div class="stat"><div class="muted">Resolved</div><p class="stat-value">{{ resolved_complaints }}</p></div>
+<section class="hero">
+	<div class="hero-panel">
+		<span class="hero-badge">Administrator</span>
+		<h1 class="page-title">Admin Dashboard</h1>
+		<p class="muted">Monitor complaints, assign work, and keep the university informed.</p>
+		<div class="grid">
+			<div class="stat"><div class="meta-row" style="margin-top:0;"><span class="feature-icon"><img class="inline-icon" src="{% static 'icons/ticket.svg' %}" alt=""></span><div class="muted">Total complaints</div></div><p class="stat-value">{{ total_complaints }}</p></div>
+			<div class="stat"><div class="meta-row" style="margin-top:0;"><span class="feature-icon"><img class="inline-icon" src="{% static 'icons/bell.svg' %}" alt=""></span><div class="muted">Pending</div></div><p class="stat-value">{{ pending_complaints }}</p></div>
+			<div class="stat"><div class="meta-row" style="margin-top:0;"><span class="feature-icon"><img class="inline-icon" src="{% static 'icons/wrench.svg' %}" alt=""></span><div class="muted">In progress</div></div><p class="stat-value">{{ in_progress_complaints }}</p></div>
+			<div class="stat"><div class="meta-row" style="margin-top:0;"><span class="feature-icon"><img class="inline-icon" src="{% static 'icons/chart.svg' %}" alt=""></span><div class="muted">Resolved</div></div><p class="stat-value">{{ resolved_complaints }}</p></div>
+		</div>
+		<div class="hero-actions">
+			<a class="button" href="{% url 'complaints:list' %}">View all complaints</a>
+			<a class="button secondary" href="{% url 'dashboard:manage-users' %}">Manage users</a>
+			<a class="button secondary" href="{% url 'dashboard:manage-departments' %}">Manage departments</a>
+			<a class="button secondary" href="{% url 'reports:report' %}">Generate reports</a>
+		</div>
 	</div>
-	<div class="hero-actions">
-		<a class="button" href="{% url 'complaints:list' %}">View all complaints</a>
-		<a class="button secondary" href="{% url 'dashboard:manage-users' %}">Manage users</a>
-		<a class="button secondary" href="{% url 'dashboard:manage-departments' %}">Manage departments</a>
-		<a class="button secondary" href="{% url 'reports:report' %}">Generate reports</a>
+	<div class="hero-panel">
+		{% include 'partials/admin_illustration.html' %}
+		<div class="mini-stack" style="margin-top: 1rem;">
+			<div class="subtle-card"><strong>Users & departments</strong><p class="muted">Keep the routing structure accurate and up to date.</p></div>
+			<div class="subtle-card"><strong>Reports</strong><p class="muted">Use complaint trends to prioritize maintenance work.</p></div>
+		</div>
 	</div>
-</div>
+</section>
 
 <div class="card" style="margin-top: 1rem;">
 	<h2>Recent complaints</h2>
