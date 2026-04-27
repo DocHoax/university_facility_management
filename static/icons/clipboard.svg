@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Clipboard icon">
+  <rect x="16" y="12" width="32" height="40" rx="8" fill="#0f4c81"/>
+  <rect x="24" y="8" width="16" height="10" rx="5" fill="#d97706"/>
+  <path d="M24 26h16M24 34h16M24 42h10" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Users icon">
+  <circle cx="24" cy="24" r="10" fill="#2563eb"/>
+  <circle cx="42" cy="27" r="8" fill="#14b8a6"/>
+  <path d="M11 50c0-7 6-12 13-12s13 5 13 12" fill="#2563eb" opacity="0.16"/>
+  <path d="M33 49c1-5 5-9 9-9 6 0 11 4 11 10" fill="#14b8a6" opacity="0.16"/>
+</svg>
