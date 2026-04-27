@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.views import LoginView, LogoutView
@@ -23,7 +24,7 @@ def register_view(request):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
             messages.success(request, "Registration successful.")
             return redirect("dashboard:home")
     else:
@@ -50,7 +51,7 @@ def change_password_view(request):
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend=settings.AUTHENTICATION_BACKENDS[0])
             messages.success(request, "Password changed successfully.")
             return redirect("accounts:profile")
     else:

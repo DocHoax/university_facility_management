@@ -31,3 +31,22 @@ class AccountsTests(TestCase):
         )
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.context["user"].is_authenticated)
+
+    def test_register_logs_user_in(self):
+        response = self.client.post(
+            reverse("accounts:register"),
+            {
+                "username": "jane",
+                "email": "jane@example.com",
+                "phone_number": "08012345678",
+                "department": self.department.id,
+                "role": User.Roles.STAFF,
+                "first_name": "Jane",
+                "last_name": "Doe",
+                "password1": "Password123!",
+                "password2": "Password123!",
+            },
+            follow=True,
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.context["user"].is_authenticated)
