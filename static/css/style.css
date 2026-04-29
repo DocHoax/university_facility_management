@@ -267,7 +267,8 @@ a:hover {
 }
 
 .footer-inner {
-    padding: 1rem 0 1.15rem;
+    padding-top: 1rem;
+    padding-bottom: 1.15rem;
 }
 
 .footer-inner p {
@@ -683,6 +684,13 @@ form ol {
         padding: 0.95rem;
         border-radius: 20px;
         flex-wrap: wrap;
+    }
+
+    .navbar,
+    .page-container,
+    .hero,
+    .footer-inner {
+        width: min(1120px, calc(100% - 1rem));
     }
 
     .nav-toggle {
