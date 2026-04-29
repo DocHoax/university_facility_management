@@ -34,7 +34,10 @@
                         {% if user.role == 'ADMIN' %}<a href="{% url 'complaints:categories' %}">Categories</a>{% endif %}
                         <a href="{% url 'notifications:list' %}">Notifications</a>
                         <a href="{% url 'accounts:profile' %}">Profile</a>
-                        <a href="{% url 'accounts:logout' %}">Logout</a>
+                        <form action="{% url 'accounts:logout' %}" method="post" class="nav-logout-form">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link-button">Logout</button>
+                        </form>
                     {% else %}
                         <a href="{% url 'accounts:login' %}">Login</a>
                         <a href="{% url 'accounts:register' %}">Register</a>
