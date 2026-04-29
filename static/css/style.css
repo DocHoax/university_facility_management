@@ -289,8 +289,8 @@ input[type="submit"] {
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--shadow-soft);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    box-shadow: none;
+    transition: transform 0.18s ease, background-color 0.18s ease, opacity 0.18s ease;
 }
 
 .button:hover,
@@ -298,7 +298,7 @@ button:hover,
 input[type="submit"]:hover {
     text-decoration: none;
     transform: translateY(-1px);
-    box-shadow: 0 12px 28px rgba(15, 76, 129, 0.22);
+    background: #0b3d68;
 }
 
 .button.secondary,
@@ -311,7 +311,7 @@ button.secondary {
 .button.secondary:hover,
 button.secondary:hover {
     background: var(--surface-soft);
-    box-shadow: var(--shadow-soft);
+    box-shadow: none;
 }
 
 .grid {
