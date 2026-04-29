@@ -1,6 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
 
 :root {
     --bg: #eef3fb;
@@ -33,7 +31,7 @@ html {
 
 body {
     margin: 0;
-    font-family: "Inter", "Segoe UI", sans-serif;
+    font-family: "Roboto", "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -99,14 +97,14 @@ a:hover {
     place-items: center;
     background: var(--primary);
     color: #fff;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 700;
     box-shadow: var(--shadow-soft);
 }
 
 .brand-copy strong {
     display: block;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 1rem;
 }
 
@@ -258,7 +256,7 @@ a:hover {
     margin: 0.6rem 0 0.8rem;
     font-size: clamp(2rem, 4vw, 3.5rem);
     line-height: 1.05;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .hero p,
@@ -336,7 +334,7 @@ button.secondary:hover {
 
 .feature-card h3 {
     margin: 0.8rem 0 0.35rem;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .feature-icon {
@@ -473,7 +471,7 @@ form ol {
 .panel h2,
 .form-card h2 {
     margin-top: 0;
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .mini-stack {
@@ -515,7 +513,7 @@ form ol {
 }
 
 .section-title {
-    font-family: "Space Grotesk", sans-serif;
+    font-family: "Roboto", sans-serif;
     margin: 0 0 0.5rem;
 }
 
