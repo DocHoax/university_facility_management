@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-label="LASUSTECH crest watermark">
+  <defs>
+    <style>
+      .ring { fill: none; stroke: #1f4f8f; stroke-width: 26; }
+      .inner-ring { fill: none; stroke: #c7d6ea; stroke-width: 10; }
+      .gold { fill: #c89a2a; }
+      .blue { fill: #2e6cc9; }
+      .teal { fill: #5cb6d4; }
+      .red { fill: #cc4b47; }
+      .cream { fill: #f4eddc; }
+      .paper { fill: #ffffff; stroke: #d8e2f0; stroke-width: 5; }
+      .page-line { stroke: #c9d7eb; stroke-width: 10; stroke-linecap: round; }
+      .book-line { stroke: #27486f; stroke-width: 6; stroke-linecap: round; }
+      .text-ring { fill: #173458; font: 700 30px 'Roboto', Arial, sans-serif; letter-spacing: 3px; }
+      .small-ring { fill: #173458; font: 700 24px 'Roboto', Arial, sans-serif; letter-spacing: 2px; }
+    </style>
+    <path id="upperArc" d="M 160 450 A 290 290 0 0 1 740 450" />
+    <path id="lowerArc" d="M 740 450 A 290 290 0 0 1 160 450" />
+  </defs>
+
+  <circle cx="450" cy="450" r="335" fill="#f8fbff" opacity="0.55" />
+  <circle cx="450" cy="450" r="300" class="ring" opacity="0.85" />
+  <circle cx="450" cy="450" r="262" class="inner-ring" opacity="0.8" />
+
+  <g opacity="0.9">
+    <rect x="338" y="98" width="54" height="124" class="red" rx="8" />
+    <rect x="390" y="78" width="54" height="144" class="blue" rx="8" />
+    <rect x="442" y="58" width="54" height="164" class="teal" rx="8" />
+    <rect x="494" y="78" width="54" height="144" class="gold" rx="8" />
+    <rect x="546" y="98" width="54" height="124" class="red" rx="8" />
+  </g>
+
+  <g transform="translate(0 20)" opacity="0.96">
+    <circle cx="450" cy="445" r="205" fill="#fefefe" stroke="#d9e4f0" stroke-width="8" />
+    <path d="M 300 450 L 355 390 L 430 390 L 430 545 L 330 545 Z" class="paper" />
+    <path d="M 600 450 L 545 390 L 470 390 L 470 545 L 570 545 Z" fill="#edf4fb" stroke="#d9e4f0" stroke-width="8" />
+    <path d="M 335 420 L 397 420" class="page-line" />
+    <path d="M 335 454 L 397 454" class="page-line" />
+    <path d="M 335 488 L 397 488" class="page-line" />
+    <path d="M 503 420 L 565 420" class="page-line" />
+    <path d="M 503 454 L 565 454" class="page-line" />
+    <path d="M 503 488 L 565 488" class="page-line" />
+    <path d="M 330 548 C 380 500, 520 500, 570 548" fill="none" stroke="#5f88b8" stroke-width="14" stroke-linecap="round" />
+    <path d="M 360 568 C 395 548, 505 548, 540 568" fill="none" stroke="#173458" stroke-width="18" stroke-linecap="round" />
+    <path d="M 392 620 C 420 606, 480 606, 508 620" fill="none" stroke="#c9d7eb" stroke-width="8" stroke-linecap="round" opacity="0.9" />
+    <circle cx="655" cy="300" r="42" fill="#f6dd8c" opacity="0.95" />
+    <path d="M 430 306 L 470 344 L 410 344 Z" fill="#d77c12" opacity="0.95" />
+    <path d="M 381 500 L 450 445 L 519 500" fill="none" stroke="#f0f4fa" stroke-width="30" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+
+  <g opacity="0.86">
+    <text class="text-ring">
+      <textPath href="#upperArc" startOffset="50%" text-anchor="middle">LAGOS STATE UNIVERSITY OF SCIENCE AND TECHNOLOGY</textPath>
+    </text>
+    <text class="small-ring">
+      <textPath href="#lowerArc" startOffset="50%" text-anchor="middle">IKORODU</textPath>
+    </text>
+  </g>
+
+  <g opacity="0.7">
+    <circle cx="275" cy="675" r="14" class="red" />
+    <circle cx="625" cy="675" r="14" class="teal" />
+    <path d="M 170 720 A 280 280 0 0 0 730 720" fill="none" stroke="#2e6cc9" stroke-width="18" stroke-linecap="round" />
+    <text x="450" y="755" text-anchor="middle" class="text-ring" style="font-size: 34px; letter-spacing: 4px;">FOR LEARNING AND SERVICE</text>
+  </g>
+</svg>

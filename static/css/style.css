@@ -35,6 +35,20 @@ body {
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
+    position: relative;
+}
+
+.page-fade {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: rgba(238, 243, 251, 0.72);
+    background-image: url("/static/images/lasustech_logo.jpg");
+    background-repeat: no-repeat;
+    background-position: center 44%;
+    background-size: min(74vw, 860px);
+    opacity: 0.16;
 }
 
 a {
@@ -50,6 +64,8 @@ a:hover {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
 }
 
 .site-header,
