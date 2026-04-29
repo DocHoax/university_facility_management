@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}University Facility Management System{% endblock %}</title>
+    <link rel="icon" type="image/jpeg" href="{% static 'images/lasustech_logo.jpg' %}?v=20260429-logo-favicon">
     <link rel="stylesheet" href="{% static 'css/style.css' %}?v=20260429-navbar-nowrap">
 </head>
 <body>
@@ -13,7 +14,9 @@
         <header class="site-header" data-nav-root>
             <div class="navbar">
                 <div class="brand">
-                    <div class="brand-mark">FM</div>
+                    <a class="brand-mark" href="{% url 'pages:home' %}" aria-label="LASUSTECH Facility Management home">
+                        <img src="{% static 'images/lasustech_logo.jpg' %}?v=20260429-logo-favicon" alt="LASUSTECH logo">
+                    </a>
                     <div class="brand-copy">
                         <strong>LASUSTECH Facility Management</strong>
                         <span>Complaint tracking and service coordination</span>
