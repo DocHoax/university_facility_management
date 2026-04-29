@@ -99,10 +99,10 @@ a:hover {
 .navbar {
     position: relative;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    gap: 1.1rem;
+    gap: 0.95rem;
     margin: 0.5rem auto;
     padding: 0.9rem 1rem;
     border: 1px solid rgba(213, 223, 235, 0.88);
@@ -116,6 +116,7 @@ a:hover {
     align-items: center;
     gap: 0.9rem;
     min-width: 0;
+    flex: 0 0 auto;
 }
 
 .brand-mark {
@@ -147,14 +148,21 @@ a:hover {
 
 .nav-links {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.35rem;
+    flex-wrap: nowrap;
+    gap: 0.25rem;
     align-items: center;
     margin-left: auto;
     padding: 0.35rem;
     border-radius: 999px;
     border: 1px solid rgba(213, 223, 235, 0.75);
     background: rgba(237, 244, 251, 0.75);
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav-links::-webkit-scrollbar {
+    display: none;
 }
 
 .nav-links form {
@@ -205,9 +213,10 @@ a:hover {
 .nav-links a {
     color: var(--text);
     font-weight: 600;
-    padding: 0.58rem 0.9rem;
+    padding: 0.56rem 0.85rem;
     border-radius: 999px;
     border: 1px solid transparent;
+    white-space: nowrap;
     transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
@@ -223,10 +232,11 @@ a:hover {
     color: var(--text);
     border: 0;
     box-shadow: none;
-    padding: 0.58rem 0.9rem;
+    padding: 0.56rem 0.85rem;
     border-radius: 999px;
     font: inherit;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .nav-links .nav-link-button:hover {
@@ -665,6 +675,7 @@ form ol {
         align-items: flex-start;
         padding: 0.95rem;
         border-radius: 20px;
+        flex-wrap: wrap;
     }
 
     .nav-toggle {
@@ -693,6 +704,7 @@ form ol {
         width: 100%;
         background: var(--surface-soft);
         padding: 0.8rem 0.95rem;
+        white-space: normal;
     }
 
     .nav-links .nav-link-button {
@@ -700,6 +712,7 @@ form ol {
         text-align: left;
         background: var(--surface-soft);
         padding: 0.8rem 0.95rem;
+        white-space: normal;
     }
 
     .two-col {
