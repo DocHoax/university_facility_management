@@ -19,14 +19,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     nav.querySelectorAll('a').forEach((link) => {
         link.addEventListener('click', () => {
-            if (window.matchMedia('(max-width: 900px)').matches) {
+            if (window.matchMedia('(max-width: 960px)').matches) {
                 closeNav();
             }
         });
     });
 
     window.addEventListener('resize', () => {
-        if (!window.matchMedia('(max-width: 900px)').matches) {
+        if (!window.matchMedia('(max-width: 960px)').matches) {
             closeNav();
         }
     });

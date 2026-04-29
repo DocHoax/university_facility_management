@@ -143,7 +143,7 @@ a:hover {
 }
 
 .nav-links form {
-        background: var(--surface-strong);
+    margin: 0;
 }
 
 .nav-toggle {
@@ -640,7 +640,7 @@ form ol {
     border: 0;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 960px) {
     .hero {
         grid-template-columns: 1fr;
         padding-top: 1.5rem;
@@ -675,6 +675,12 @@ form ol {
 
     .nav-links a {
         width: 100%;
+        background: var(--surface-soft);
+    }
+
+    .nav-links .nav-link-button {
+        width: 100%;
+        text-align: left;
         background: var(--surface-soft);
     }
 
