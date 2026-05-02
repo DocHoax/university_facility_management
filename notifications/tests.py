@@ -27,3 +27,10 @@ class NotificationTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.notification.refresh_from_db()
         self.assertTrue(self.notification.is_read)
+
+    def test_live_endpoint_returns_unread_count(self):
+        self.client.login(username="john", password="Password123!")
+        response = self.client.get(reverse("notifications:live"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["unread_count"], 1)
+        self.assertEqual(response.json()["latest"]["title"], "Complaint submitted")

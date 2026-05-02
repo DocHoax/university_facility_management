@@ -36,7 +36,10 @@
                         <a href="{% url 'dashboard:home' %}">Dashboard</a>
                         <a href="{% url 'complaints:list' %}">Complaints</a>
                         {% if user.role == 'ADMIN' %}<a href="{% url 'complaints:categories' %}">Categories</a>{% endif %}
-                        <a href="{% url 'notifications:list' %}">Notifications</a>
+                        <a href="{% url 'notifications:list' %}" class="nav-notification-link" data-notification-link>
+                            Notifications
+                            <span class="nav-notification-badge" data-notification-badge hidden>0</span>
+                        </a>
                         <a href="{% url 'accounts:profile' %}">Profile</a>
                         <form action="{% url 'accounts:logout' %}" method="post" class="nav-logout-form">
                             {% csrf_token %}
