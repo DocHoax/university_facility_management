@@ -1,10 +1,20 @@
 from django import forms
 
-from accounts.models import User
+from accounts.models import Department, User
 from complaints.models import Complaint, ComplaintCategory, ComplaintComment
 
 
 class ComplaintForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
+        super().__init__(*args, **kwargs)
+        self.fields["department"].queryset = Department.objects.filter(is_active=True).order_by("name")
+        self.fields["category"].queryset = ComplaintCategory.objects.filter(is_active=True).order_by("name")
+        self.fields["department"].empty_label = "Select department"
+        self.fields["category"].empty_label = "Select category"
+        if user and getattr(user, "department_id", None):
+            self.fields["department"].initial = user.department_id
+
     class Meta:
         model = Complaint
         fields = ["department", "category", "location", "description", "priority", "attachment"]

@@ -45,7 +45,7 @@ def _email(user, subject, body):
 @login_required
 def complaint_create_view(request):
     if request.method == "POST":
-        form = ComplaintForm(request.POST, request.FILES)
+        form = ComplaintForm(request.POST, request.FILES, user=request.user)
         if form.is_valid():
             complaint = form.save(commit=False)
             complaint.user = request.user
@@ -54,7 +54,7 @@ def complaint_create_view(request):
             _notify(request.user, f"Complaint {complaint.ticket_id} submitted", "Your complaint has been received and is pending review.")
             return redirect("complaints:detail", ticket_id=complaint.ticket_id)
     else:
-        form = ComplaintForm()
+        form = ComplaintForm(user=request.user)
     return render(request, "complaints/create.html", {"form": form})
 
 

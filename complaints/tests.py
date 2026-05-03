@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from accounts.models import Department
+from complaints.forms import ComplaintForm
 from complaints.models import Complaint, ComplaintAssignment, ComplaintCategory, ComplaintStatus
 
 
@@ -82,3 +83,17 @@ class ComplaintTests(TestCase):
         self.assertEqual(response.status_code, 302)
         self.complaint.refresh_from_db()
         self.assertEqual(self.complaint.status, ComplaintStatus.CLOSED)
+
+    def test_complaint_form_uses_active_choices_and_user_department(self):
+        inactive_department = Department.objects.create(name="Archive", code="ARC", is_active=False)
+        inactive_category = ComplaintCategory.objects.create(name="Old Category", is_active=False)
+
+        form = ComplaintForm(user=self.staff)
+
+        self.assertEqual(form.fields["department"].empty_label, "Select department")
+        self.assertEqual(form.fields["category"].empty_label, "Select category")
+        self.assertEqual(form.fields["department"].initial, self.department.id)
+        self.assertIn(self.department, form.fields["department"].queryset)
+        self.assertNotIn(inactive_department, form.fields["department"].queryset)
+        self.assertIn(self.category, form.fields["category"].queryset)
+        self.assertNotIn(inactive_category, form.fields["category"].queryset)
